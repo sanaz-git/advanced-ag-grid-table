@@ -8,7 +8,32 @@ import { useState ,useEffect, useMemo, useCallback, useRef} from 'react';
 
 import './App.scss';
 
-
+var filterParams = {
+  comparator: (filterLocalDateAtMidnight, cellValue) => {
+    var dateAsString = cellValue;
+    if (dateAsString == null) return -1;
+    var dateParts = dateAsString.split('/');
+    var cellDate = new Date(
+      Number(dateParts[2]),
+      Number(dateParts[1]) - 1,
+      Number(dateParts[0])
+    );
+    if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+      return 0;
+    }
+    if (cellDate < filterLocalDateAtMidnight) {
+      return -1;
+    }
+    if (cellDate > filterLocalDateAtMidnight) {
+      return 1;
+    }
+    return 0;
+  },
+  browserDatePicker: true,
+  minValidYear: 2000,
+  maxValidYear: 2021,
+  inRangeFloatingFilterDateFormat: 'Do MMM YYYY',
+};
 
 
 function App() {
@@ -25,15 +50,17 @@ function App() {
     showDisabledCheckboxes: true, 
     // rowDrag: true,
   },
-    { field: 'age',},
-    { field: 'country',},
-    { field: 'sport' },
+    { field: 'age',filter: 'agNumberColumnFilter',},
+    { field: 'country',filter: 'agTextColumnFilter',},
+    { field: 'sport',filter: 'agTextColumnFilter', },
     { field: 'year',} ,
-    { field: 'date' },
-    { field: 'gold' },
-    { field: 'silver' },
-    { field: 'bronze' },
-    { field: 'total' },
+    { field: 'date', 
+      filter: 'agDateColumnFilter',
+      filterParams: filterParams, },
+    { field: 'gold',filter: 'agNumberColumnFilter', },
+    { field: 'silver' ,filter: 'agNumberColumnFilter',},
+    { field: 'bronze',filter: 'agNumberColumnFilter', },
+    { field: 'total',filter: 'agNumberColumnFilter', },
   ]);
   const defaultColDef = useMemo(() => {
    
