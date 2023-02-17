@@ -1,0 +1,52 @@
+
+@import "~ag-grid-community/src/styles/ag-grid.scss";
+@import "~ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin";
+
+.ag-theme-alpine {
+    // ^^^ the name of your theme here.
+    @include ag-theme-alpine((
+        // ^^^ call the mixin provided by the theme you're extending
+        alpine-active-color: #253C59,
+        // ^^^ pass theme parameters
+        background-color: #d9dcdd,
+        header-background-color: #253C59,
+        foreground-color: #fff,//text color
+        secondary-foreground-color: #253C59, //pagination text
+        checkbox-unchecked-color: #fff,
+    ));
+
+    .ag-header {
+        font-style: italic;  
+        text-align: center; 
+        font-size: 15px;   
+
+    }
+
+    .ag-paging-panel{
+    border-radius: 15px;     
+    border:1px solid #253C59;
+    }
+ 
+    .ag-root-wrapper {
+       border-radius: 15px;      
+      }
+    
+    .ag-header-cell-text{
+        text-align: center;
+        flex: 1;
+    }
+
+    .ag-ltr,
+    .ag-select,
+    .ag-ltr input[class^=ag-][type=text]{
+        color:#253C59;
+    }
+
+    .ag-icon{
+        color: #BF8D30;
+        
+    }
+
+    // or write CSS selectors to make customisations beyond what the parameters support
+   
+}
