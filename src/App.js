@@ -48,7 +48,7 @@ function App() {
   const [gridColumnApi, setGridColumnApi] = useState(null);
   const [hideColumn, setHideColumn] = useState(false);
 
-  const [show,setShow]=useState(true)
+  const [show,setShow]=useState(false)
 
 
   const [rowData, setRowData] = useState([]);
@@ -105,11 +105,23 @@ function App() {
   //   gridRef.current.api.deselectAll();
   // });
 
+
+  //pagination
   const onPageSizeChanged = useCallback(() => {
     var value = document.getElementById("page-size").value;
     gridRef.current.api.paginationSetPageSize(Number(value));
   }, []);
 
+
+  //global search
+  const onFilterTextBoxChanged = useCallback(() => {
+    gridRef.current.api.setQuickFilter(
+      document.getElementById('filter-text-box').value
+    );
+  }, []);
+
+
+  //show and hide columns
   function onGridReady(params) {
     setGridApi(params.api);
     setGridColumnApi(params.columnApi);
@@ -149,8 +161,13 @@ function App() {
           </select>
           {/* <button onClick={pushMeClicked} style={{marginLeft:"10px"}}>Push Me</button> */}
          
-        
-          <button onClick={()=>{setShow(!show)}}>  Show and Hide Columns: </button>
+          <input
+            type="text"
+            id="filter-text-box"
+            placeholder="Search..."
+            onInput={onFilterTextBoxChanged}
+          />
+          <button onClick={()=>{setShow(!show)}}>  Show and Hide Columns </button>
           
           {
             show?<div>
