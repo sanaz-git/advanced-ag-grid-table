@@ -101,9 +101,9 @@ function App() {
   });
 
   //deselect
-  // const pushMeClicked = useCallback (e => {
-  //   gridRef.current.api.deselectAll();
-  // });
+  const deselect = useCallback (e => {
+    gridRef.current.api.deselectAll();
+  });
 
 
   //pagination
@@ -153,35 +153,37 @@ function App() {
       <h1 className="title">AG GRID TABLE</h1>
       <div className="example-wrapper">
         <div className="example-header">
+
           <span>Page Size: </span>
           <select onChange={onPageSizeChanged} id="page-size">
             <option value="10">10</option>
             <option value="5">5</option>
             <option value="15">15</option>
           </select>
-          {/* <button onClick={pushMeClicked} style={{marginLeft:"10px"}}>Push Me</button> */}
-         
+                 
           <input
             type="text"
             id="filter-text-box"
             placeholder="Search..."
             onInput={onFilterTextBoxChanged}
-          />
-          <button onClick={()=>{setShow(!show)}}>  Show and Hide Columns </button>
-          
-          {
-            show?<div>
-            <button onClick={showAge}>age</button>
-            <button onClick={showCountry}>country</button>
-            <button onClick={showSport}>sport</button>
-          </div> : null
+
+          />  
+
+          <div >
+          <button onClick={deselect} >Deselect</button>
+            <button onClick={()=>{setShow(!show)}}>  Show and Hide Columns </button>
             
-          }
-       
-        
-
+            {
+              show?<div >
+              <button onClick={showAge}>age</button>
+              <button onClick={showCountry}>country</button>
+              <button onClick={showSport}>sport</button>
+            </div> : null            
+            }
         </div>
-
+        
+        </div>
+        
         <div style={gridStyle} className="ag-theme-alpine">
           <AgGridReact
             onGridReady={onGridReady}
