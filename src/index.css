@@ -30,11 +30,26 @@ code {
   font-style: italic;  
   height: 30px;
   font-size: 15px;
-  color: #BF8D30;   
+  color: #BF8D30;  
+  display: flex; 
+  flex-direction: row;
 
 }
 
 .example-header span{
   padding-right: 15px;
   font-weight: bold;
+ 
+}
+
+select{
+  margin-right: 10px;
+  height: 20px;
+}
+
+button{
+  color: #BF8D30; 
+  font-weight: 600;
+  font-style: italic; 
+  margin-bottom: 10px;
 }
