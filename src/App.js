@@ -68,7 +68,7 @@ function App() {
     { field: "country", filter: "agTextColumnFilter" },
     { field: "sport", filter: "agTextColumnFilter" },
     { field: "year" },
-    { field: "date", filter: "agDateColumnFilter", filterParams: filterParams },
+    { field: "date", filter: "agDateColumnFilter", filterParams: filterParams, suppressMenu: true,},
     { field: "gold", filter: "agNumberColumnFilter" },
     { field: "silver", filter: "agNumberColumnFilter" },
     { field: "bronze", filter: "agNumberColumnFilter" },
@@ -147,6 +147,34 @@ function App() {
    gridApi.sizeColumnsToFit()
   }
 
+//floating filter
+  const ageBelow25 = useCallback(() => {
+    var ageFilterComponent = gridRef.current.api.getFilterInstance('age');
+    ageFilterComponent.setModel({
+      type: 'lessThan',
+      filter: 25,
+      filterTo: null,
+    });
+    gridRef.current.api.onFilterChanged();
+  }, []);
+
+  const dateCombined = useCallback(() => {
+    var dateFilterComponent = gridRef.current.api.getFilterInstance('date');
+    dateFilterComponent.setModel({
+      condition1: {
+        type: 'lessThan',
+        dateFrom: '2012-01-01',
+        dateTo: null,
+      },
+      operator: 'OR',
+      condition2: {
+        type: 'greaterThan',
+        dateFrom: '2010-01-01',
+        dateTo: null,
+      },
+    });
+    gridRef.current.api.onFilterChanged();
+  }, []);
 
   return (
     <div style={containerStyle}>
@@ -170,7 +198,7 @@ function App() {
           />  
 
           <div >
-          <button onClick={deselect} >Deselect</button>
+            <button onClick={deselect} >Deselect</button>
             <button onClick={()=>{setShow(!show)}}>  Show and Hide Columns </button>
             
             {
@@ -180,6 +208,8 @@ function App() {
               <button onClick={showSport}>sport</button>
             </div> : null            
             }
+            <button onClick={ageBelow25}>Age Below 25</button>
+            <button onClick={dateCombined}>Date combined</button>
         </div>
         
         </div>
