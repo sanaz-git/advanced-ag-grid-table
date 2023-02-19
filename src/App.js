@@ -178,7 +178,7 @@ function App() {
 
   return (
     <div style={containerStyle}>
-      <h1 className="title">AG GRID TABLE</h1>
+      <h1 className="title">ADVANCED AG GRID TABLE</h1>
       <div className="example-wrapper">
         <div className="example-header">
 
