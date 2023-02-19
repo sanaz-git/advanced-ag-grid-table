@@ -1,1 +1,1 @@
-# advanced-table
+# advanced-ag-grid-table
